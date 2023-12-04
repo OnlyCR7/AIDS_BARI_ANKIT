@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker Register</title>
+    <link rel="stylesheet" type="text/css" href="register.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background-image: url('e.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body>
+    <section class="form-container">
+        <form action="connect.php" method="post" onsubmit="return validateForm();">
+            <h3>Create an Account!</h3>
+            <div class="inputBox">
+                <input type="text" id="name" name="name" required pattern="[A-Za-z\s]+" maxlength="50" autocomplete="off">
+                <span>Name</span>
+            </div>
+            <br>
+            <div class="inputBox">
+                <input type="email" id="email" name="email" required autocomplete="off">
+                <span>Email</span>
+            </div>
+            <br>
+            <div class="inputBox">
+                <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" autocomplete="off">
+                <span>Phone</span>
+            </div>
+            <br>
+            <div class="inputBox">
+                <input type="password" id="password" name="password" required autocomplete="off">
+                <span>Password</span>
+            </div>
+            <br>
+            <div class="inputBox">
+                <input type="password" id="cpassword" name="cpassword" required autocomplete="off">
+                <span>Confirm Password</span>
+            </div>
+            <br>
+            <p>Already have an account? <a href="login.html">Login now</a></p>
+            <input type="submit" value="Register" name="login" class="btn" id="register_btn">
+        </form>
+        <script>
+            function validateForm() {
+                var name = document.getElementById('name').value;
+                var email = document.getElementById('email').value;
+                var phone = document.getElementById('phone').value;
+                var password = document.getElementById('password').value;
+                var cpassword = document.getElementById('cpassword').value;
+
+                if (name === '' || email === '' || phone === '' || password === '' || cpassword === '') {
+                    alert('Please fill in all the fields.');
+                    return false;
+                }
+
+                if (!isValidEmail(email)) {
+                    alert('Please enter a valid email address.');
+                    return false;
+                }
+
+                if (password !== cpassword) {
+                    alert('Passwords do not match. Please re-enter your password.');
+                    return false;
+                }
+
+                if (password.length < 8) {
+                    alert('Password must be at least 8 characters long.');
+                    return false;
+                }
+
+                return true;
+            }
+
+            function isValidEmail(email) {
+                var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                return emailPattern.test(email);
+            }
+        </script>
+    </section>
+</body>
+</html>
